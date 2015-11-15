@@ -58,7 +58,5 @@ table#movies th.hilite {
 }
 form label {
   display: block;
-  line-height: 25px;
-  font-weight: bold;
-  color: maroon;
+  line-height: 20px;
 }

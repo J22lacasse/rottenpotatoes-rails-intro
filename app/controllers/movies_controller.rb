@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    sort = params[:sort] || session[:sort]
+    sorting = params[:sorting] || session[:sorting]
     if params[:ratings]
       @filter_string = []
       params[:ratings].each_key do |key|
@@ -25,15 +25,15 @@ class MoviesController < ApplicationController
     end
     @all_ratings = Movie.all_ratings
 
-    if params[:sort] != session[:sort]
-      session[:sort] = sort
-      redirect_to :sort => sort, :ratings => @selected_ratings and return
+    if params[:sorting] != session[:sorting]
+      session[:sorting] = sorting
+      redirect_to :sorting => sorting, :ratings => @selected_ratings and return
     end
 
-    if params[:sort] == 'Title'
+    if params[:sorting] == 'Title'
       @title_class = 'hilite'
       @movies = Movie.rating_filtered(@filter_string).order("title")
-    elsif params[:sort] == 'Release'
+    elsif params[:sorting] == 'Release'
       @release_class = 'hilite'
       @movies = Movie.rating_filtered(@filter_string).order("release_date")
     else
